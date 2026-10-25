@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="BiblioCampus.Views.AddBookPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BiblioCampus.ViewModels"
+             x:DataType="vm:AddBookViewModel"
+             Title="Ajouter un livre">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="16" Spacing="12">
+            <Entry Placeholder="Titre *" Text="{Binding Title}" />
+            <Entry Placeholder="Auteur *" Text="{Binding Author}" />
+            <Entry Placeholder="ISBN" Text="{Binding Isbn}" />
+            <Entry Placeholder="Catégorie" Text="{Binding Category}" />
+            <Entry Placeholder="Nombre d'exemplaires" Keyboard="Numeric" Text="{Binding Copies}" />
+            <Button Text="Enregistrer" Command="{Binding SaveCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

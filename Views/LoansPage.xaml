@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="BiblioCampus.Views.LoansPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:BiblioCampus.ViewModels"
+             xmlns:models="clr-namespace:BiblioCampus.Models"
+             x:DataType="vm:LoansViewModel"
+             Title="Emprunts en cours">
+
+    <CollectionView ItemsSource="{Binding Loans}" Margin="12">
+        <CollectionView.EmptyView>
+            <Label Text="Aucun emprunt en cours." HorizontalOptions="Center" Margin="0,40" />
+        </CollectionView.EmptyView>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:Loan">
+                <Border Margin="0,0,0,8" Padding="12" StrokeThickness="0"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource CardLight}, Dark={StaticResource CardDark}}">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10" />
+                    </Border.StrokeShape>
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <VerticalStackLayout Spacing="2">
+                            <Label Text="{Binding BookTitle}" FontAttributes="Bold" FontSize="16" />
+                            <Label Text="{Binding StudentName, StringFormat='Étudiant : {0}'}" FontSize="13" />
+                            <Label Text="{Binding DueDate, StringFormat='Retour prévu : {0:dd/MM/yyyy}'}" FontSize="12" />
+                            <Label Text="{Binding StatusText}" FontSize="12" FontAttributes="Bold">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding IsOverdue}" Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource Danger}" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </VerticalStackLayout>
+                        <Button Grid.Column="1" Text="Retourner" VerticalOptions="Center"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:LoansViewModel}}, Path=ReturnCommand}"
+                                CommandParameter="{Binding .}" />
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

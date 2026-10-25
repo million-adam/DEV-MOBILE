@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="BiblioCampus.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:BiblioCampus.Views"
+       Title="BiblioCampus">
+
+    <TabBar>
+        <ShellContent Title="Catalogue" ContentTemplate="{DataTemplate views:BooksPage}" />
+        <ShellContent Title="Emprunts" ContentTemplate="{DataTemplate views:LoansPage}" />
+        <ShellContent Title="Ajouter" ContentTemplate="{DataTemplate views:AddBookPage}" />
+    </TabBar>
+</Shell>
